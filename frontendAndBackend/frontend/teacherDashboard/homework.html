@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework - Teacher Portal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if external -->
+    <style>
+        /* Add any additional styles specific to this page */
+        .homework-list {
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+        }
+        .homework-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .homework-list li {
+            background-color: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Teacher Portal - Animal Conservation</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">Assignments</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="homework.html">Homework</a></li>
+            <li><a href="learning_material.html">Learning Material</a></li>
+            <li><a href="diary.html">Diary</a></li>
+            <li><a href="timetable.html">Timetable</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fixed Login Button -->
+<a href="../login.html" class="login-btn">Logout</a>
+
+<!-- Main Content -->
+<section id="homework" class="active-section">
+    <h2>Check Homework</h2>
+    <p>Review and grade homework submissions from your students.</p>
+
+    <div class="homework-list">
+        <h3>Homework Submissions</h3>
+        <ul>
+            <li><strong>John Doe:</strong> Research on Endangered Species - <a href="#">Grade</a></li>
+            <li><strong>Jane Smith:</strong> Habitat Conservation Project - <a href="#">Grade</a></li>
+            <li><strong>Alice Johnson:</strong> Wildlife Photography Contest - <a href="#">Grade</a></li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Animal Conservation Team</p>
+</footer>
+</body>
+</html>

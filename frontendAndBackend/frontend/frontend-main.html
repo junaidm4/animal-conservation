@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Conservation</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9; /* Light green */
+            color: #333; /* Dark gray for readability */
+            line-height: 1.6;
+            padding-top: 60px; /* Added padding to prevent button from overlapping */
+            text-align: center; /* Centering all text in the body */
+        }
+
+        /* Header styles */
+        header {
+            background-color: #2c6b45; /* Deep green */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center; /* Ensures the nav links are centered */
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #ffcc00; /* Yellow for visibility */
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        header nav ul li a:hover {
+            color: #ffa500; /* Orange on hover */
+        }
+
+        /* Fixed Login Button */
+        .login-btn {
+            background-color: #ff8c00; /* Bright orange */
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: 3px solid #73AD21;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: fixed;  /* Keeps it fixed */
+            top: 10px;  /* Distance from top */
+            right: 10px;  /* Distance from right */
+            width: 150px;
+            text-align: center;
+            z-index: 9999; /* Ensures it stays above all elements */
+        }
+
+        .login-btn:hover {
+            background-color: #e07b00; /* Darker orange on hover */
+        }
+
+        /* Main content section */
+        section {
+            display: none;
+        }
+
+        .active-section {
+            display: block;
+            text-align: center; /* Centering all text within the sections */
+        }
+
+        /* Image Gallery Styles */
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between images */
+            margin-top: 20px;
+            margin-bottom: 50px; /* Added space before the footer */
+            flex-wrap: wrap; /* Makes it responsive */
+            text-align: center; /* Centering images */
+        }
+
+        .image-gallery img {
+            width: 300px; /* Adjust the width */
+            height: auto;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a soft shadow */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #2c6b45; /* Deep green */
+            color: white;
+            text-align: center; /* Center footer text */
+            padding: 15px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1em;
+        }
+
+        /* Mobile-friendly adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            #main-content h2 {
+                font-size: 2em;
+            }
+
+            #main-content p {
+                font-size: 1.1em;
+            }
+
+            .image-gallery img {
+                width: 100%; /* Full width on small screens */
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Animal Conservation</h1>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('about')">About</a></li>
+            <li><a href="#" onclick="showSection('projects')">Projects</a></li>
+            <li><a href="#" onclick="showSection('get_involved')">Get Involved</a></li>
+            <li><a href="#" onclick="showSection('learning_material')">Learning Material</a></li>
+            <li><a href="#" onclick="showSection('interactive_games')">Interactive Games</a></li>
+            <li><a href="#" onclick="showSection('classes')">Classes</a></li>
+            <li><a href="#" onclick="showSection('student_progress')">Student Progress Reports</a></li>
+            <li><a href="#" onclick="showSection('my_account')">My Account</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fixed Login Button -->
+<a href="login.html" class="login-btn">Login</a>
+
+<!-- Home Section (Welcome Text + Images) -->
+<section id="home" class="active-section">
+    <h2>Welcome to our Animal Conservation Website</h2>
+    <p>This website aims to raise awareness about the importance of animal conservation and provide information about various conservation projects.</p>
+
+    <!-- Image Gallery -->
+    <div class="image-gallery">
+        <img src="wildlife.jpg" alt="Wildlife Conservation">
+        <img src="forest.jpg" alt="Forest Preservation">
+        <img src="tiger.jpg" alt="Endangered Species">
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-container">
+        <h2>About Us</h2>
+        <p class="intro-text">Our mission is to protect endangered species, restore natural habitats, and educate people about the importance of preserving wildlife.</p>
+
+        <div class="about-content">
+            <div class="about-box">
+                <h3>🌍 Our Mission</h3>
+                <p>We work with conservationists, researchers, and volunteers worldwide to promote sustainable solutions for protecting biodiversity.</p>
+            </div>
+
+            <div class="about-box">
+                <h3>🐾 What We Do</h3>
+                <ul>
+                    <li>Raise awareness about endangered species and environmental issues.</li>
+                    <li>Support wildlife conservation projects and habitat restoration.</li>
+                    <li>Provide educational resources and interactive learning experiences.</li>
+                    <li>Encourage community involvement through volunteering and donations.</li>
+                </ul>
+            </div>
+
+            <div class="about-box">
+                <h3>👩‍🔬 Meet Our Team</h3>
+                <p>Our team consists of passionate conservationists, biologists, educators, and volunteers dedicated to making a difference.</p>
+            </div>
+
+            <div class="about-box">
+                <h3>💚 How You Can Help</h3>
+                <p>Get involved by joining our conservation programs, donating, or spreading awareness. Every action counts towards protecting wildlife!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* About Us Section Styling */
+    .about-container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-container h2 {
+        font-size: 2.5em;
+        color: #2c6b45;
+        margin-bottom: 10px;
+    }
+
+    .intro-text {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .about-box {
+        background-color: #e8f5e9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .about-box h3 {
+        font-size: 1.5em;
+        color: #1e4c33;
+        margin-bottom: 10px;
+    }
+
+    .about-box ul {
+        padding-left: 20px;
+    }
+
+    .about-box li {
+        margin-bottom: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .about-content {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section id="projects">
+    <h2>Our Projects</h2>
+    <p>This page lists all of our conservation projects aimed at protecting wildlife and restoring ecosystems.</p>
+
+    <!-- Project Overview -->
+    <div class="project-overview">
+        <h3>🌍 Global Wildlife Protection</h3>
+        <p>This project focuses on protecting endangered species worldwide by establishing protected areas and creating awareness around the threats they face.</p>
+    </div>
+
+    <div class="project-overview">
+        <h3>🌳 Habitat Restoration</h3>
+        <p>We are working on restoring deforested areas and degraded ecosystems to support the recovery of biodiversity and mitigate climate change.</p>
+    </div>
+
+    <!-- Project Gallery -->
+    <div class="project-gallery">
+        <img src="project1.jpg" alt="Wildlife Conservation Project" />
+        <img src="project2.jpg" alt="Habitat Restoration Project" />
+        <img src="project3.jpg" alt="Marine Protection Initiative" />
+    </div>
+
+    <!-- Project List -->
+    <div class="project-list">
+        <h3>Ongoing Projects</h3>
+        <ul>
+            <li><a href="https://www.rainforesttrust.org/urgent-projects/#:~:text=Rainforest%20Trust%20focuses%20on%20saving,protecting%20habitat%20for%20endangered%20species." target="_blank">Protecting the Rainforests</a> - Aiming to halt deforestation and preserve biodiversity.</li>
+            <li><a href="https://www.volunteerhq.org/blog/what-to-expect-wildlife-conservation-volunteer-project-in-botswana/" target="_blank">Wildlife Conservation in Botswana</a> - Working to reduce poaching and promote anti-poaching initiatives.</li>
+            <li><a href="https://www.reeflifefoundation.org/?gad_source=1&gclid=EAIaIQobChMI49v8qPLfiwMVq5NQBh2E2AJ-EAAYASAAEgK6p_D_BwE" target="_blank">Coral Reef Restoration</a> - Rebuilding coral ecosystems to restore marine life.</li>
+        </ul>
+    </div>
+
+    <!-- Success Stories -->
+    <div class="success-stories">
+        <h3>Success Stories</h3>
+        <div class="story">
+            <h4>Saving Endangered Tigers</h4>
+            <p>Thanks to our conservation efforts, tiger populations in protected areas have started to show signs of recovery. Local communities have also benefited from sustainable tourism.</p>
+        </div>
+        <div class="story">
+            <h4>Restoring Coastal Habitats</h4>
+            <p>Our coastal restoration program has brought back vital marine life to areas that were once barren. The community-led effort is a key to its success.</p>
+        </div>
+    </div>
+
+    <!-- Project Timeline -->
+    <div class="project-timeline">
+        <h3>Project Timeline</h3>
+        <ul>
+            <li>January 2024 - Launch of Tiger Conservation Program</li>
+            <li>March 2024 - Completed restoration of 50 hectares of coastal land</li>
+            <li>August 2024 - Expanded project to new locations</li>
+        </ul>
+    </div>
+
+    <!-- How to Get Involved -->
+    <div class="get-involved">
+        <h3>How You Can Help</h3>
+        <p>Get involved by donating to a project, volunteering your time, or spreading awareness about the importance of conservation. Every contribution counts!</p>
+        <a href="donate.html" class="btn-donate">Donate to a Project</a>
+    </div>
+</section>
+
+<section id="get_involved">
+    <h2>Get Involved</h2>
+    <p>Find out how you can participate in animal conservation efforts.</p>
+</section>
+
+
+
+<section id="get_involved">
+    <h2>Get Involved</h2>
+    <p>Find out how you can participate in animal conservation efforts.</p>
+</section>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Material - Animal Conservation</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9; /* Light green */
+            color: #333; /* Dark gray for readability */
+            line-height: 1.6;
+            padding-top: 60px; /* Added padding to prevent button from overlapping */
+            text-align: center; /* Centering all text in the body */
+        }
+
+        /* Learning Material Section Styles */
+        #learning_material {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2c6b45;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 2em;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .resource-list ul, .resource-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .resource-list li, .resource-links li {
+            margin: 15px 0;
+        }
+
+        .resource-list a, .resource-links a {
+            color: #ff8c00;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .resource-list a:hover, .resource-links a:hover {
+            color: #e07b00;
+        }
+
+        .video-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .video-item {
+            width: 100%;
+            max-width: 560px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .video-item iframe {
+            border-radius: 10px;
+        }
+
+        .video-item p {
+            font-size: 1.2em;
+            color: #2c6b45;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .video-item {
+                width: 100%;
+            }
+
+            .resource-list li, .resource-links li {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Learning Material Section -->
+<section id="learning_material">
+    <h2>Learning Material</h2>
+    <p>Explore educational resources about animal conservation and wildlife protection.</p>
+
+    <!-- Educational Articles Section -->
+    <h3>📚 Educational Articles</h3>
+    <div class="resource-list">
+        <ul>
+            <li><a href="https://www.ifaw.org/uk/journal/facts-animal-welfare-conservation" target="_blank">Facts about Animal Welfare & Conservation (IFAW)</a></li>
+            <li><a href="https://www.worldwildlife.org/species" target="_blank">Endangered Species Profiles (WWF)</a></li>
+            <li><a href="https://www.nationalgeographic.com/animals" target="_blank">National Geographic: Wildlife Conservation</a></li>
+        </ul>
+    </div>
+
+    <!-- Educational Videos Section -->
+    <h3>🎥 Educational Videos</h3>
+    <div class="video-container">
+        <div class="video-item">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6vD-V3tO2rw" title="Animal Conservation | Understanding the Importance of Conservation" frameborder="0" allowfullscreen></iframe>
+            <p><a href="https://www.youtube.com/watch?v=6vD-V3tO2rw" target="_blank">Watch: Animal Conservation | Understanding the Importance of Conservation</a></p>
+        </div>
+        <div class="video-item">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/e-yAO267tvE" title="Wildlife Conservation | How We Can Protect Our Planet's Species" frameborder="0" allowfullscreen></iframe>
+            <p><a href="https://www.youtube.com/watch?v=e-yAO267tvE" target="_blank">Watch: Wildlife Conservation | How We Can Protect Our Planet's Species</a></p>
+        </div>
+    </div>
+
+    <!-- External Educational Links Section -->
+    <h3>🔗 Additional Resources</h3>
+    <div class="resource-links">
+        <ul>
+            <li><a href="https://sustainability.yale.edu/blog/6-ways-preserve-biodiversity" target="_blank">6 Ways to Preserve Biodiversity (Yale Sustainability)</a></li>
+            <li><a href="https://www.wildfutures.org/our-work/uk-conservation-sustainability/" target="_blank">UK Conservation & Sustainability (Wild Futures)</a></li>
+            <li><a href="https://www.conservation.org/blog" target="_blank">Conservation.org Blog</a></li>
+        </ul>
+    </div>
+</section>
+
+</body>
+</html>
+
+
+
+<section id="interactive_games">
+    <h2>Interactive Games</h2>
+    <p>Enjoy some fun, interactive games related to conservation.</p>
+
+    <div class="game-list">
+        <h3>Test Your Conservation Knowledge</h3>
+        <ul>
+            <li><a href="https://www.worldwildlife.org/pages/take-our-wildlife-quiz" target="_blank">WWF Wildlife Quiz</a> - Test your knowledge about wildlife species and their habitats.</li>
+            <li><a href="https://www.cserc.org/sierra-fun/games/match-habitat/" target="_blank">Match the Habitat Game</a> - Match animals to their correct habitats in this educational game.</li>
+            <li><a href="https://www.earthday.org/protect-species-quiz/" target="_blank">Protect Our Species Quiz</a> - Learn about biodiversity and conservation efforts.</li>
+        </ul>
+    </div>
+</section>
+
+
+
+
+
+<section id="classes">
+    <h2>Classes</h2>
+    <p>Learn more through classes about environmental conservation.</p>
+</section>
+
+<section id="student_progress">
+    <h2>Student Progress Reports</h2>
+    <p>View progress reports for students participating in conservation education.</p>
+</section>
+
+<section id="my_account">
+    <h2>My Account</h2>
+    <p>View and manage your account information.</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 Animal Conservation Team</p>
+</footer>
+
+<script>
+    function showSection(section) {
+        // Hide all sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(function(sec) {
+            sec.classList.remove('active-section');
+        });
+
+        // Show the selected section
+        const selectedSection = document.getElementById(section);
+        if (selectedSection) {
+            selectedSection.classList.add('active-section');
+        }
+    }
+</script>
+
+</body>
+</html>

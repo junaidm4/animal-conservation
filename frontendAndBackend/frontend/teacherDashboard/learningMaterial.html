@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Material - Teacher Portal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if external -->
+    <style>
+        /* Add any additional styles specific to this page */
+        .upload-form {
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+        }
+        .upload-form input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Teacher Portal - Animal Conservation</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">Assignments</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="homework.html">Homework</a></li>
+            <li><a href="learning_material.html">Learning Material</a></li>
+            <li><a href="diary.html">Diary</a></li>
+            <li><a href="timetable.html">Timetable</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fixed Login Button -->
+<a href="../login.html" class="login-btn">Logout</a>
+
+<!-- Main Content -->
+<section id="learning-material" class="active-section">
+    <h2>Upload Learning Material</h2>
+    <p>Upload and share learning resources with your students.</p>
+
+    <div class="upload-form">
+        <form action="#" method="post" enctype="multipart/form-data">
+            <label for="file">Choose a file:</label>
+            <input type="file" id="file" name="file" required>
+            <br>
+            <button type="submit" class="btn">Upload</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Animal Conservation Team</p>
+</footer>
+</body>
+</html>
