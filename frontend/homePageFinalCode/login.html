@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            color: #333;
+            text-align: center;
+            padding-top: 60px;
+            position: relative;
+        }
+
+        /* Back to Home Button */
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #2c6b45;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: #1e4c33;
+        }
+
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .login-container {
+            width: 400px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1.1em;
+        }
+
+        .login-btn, .signup-btn {
+            font-size: 1.2em;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .login-btn {
+            background-color: #ff8c00;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background-color: #e07b00;
+        }
+
+        .signup-btn {
+            background-color: #2c6b45;
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: #1e4c33;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Back to Home Button -->
+<a href="bigtest2.html" class="back-btn">Back to Home</a>
+
+<div class="login-wrapper">
+    <!-- Teacher Login Container -->
+    <div class="login-container">
+        <h2>Teacher Login</h2>
+        <form id="teacher-login-form">
+            <input type="text" id="teacher-username" placeholder="Username" required>
+            <input type="password" id="teacher-password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <!-- Sign Up Button (Linked to signup.html) -->
+        <a href="signup.html"><button class="signup-btn">Sign Up</button></a>
+    </div>
+
+    <!-- Student Login Container -->
+    <div class="login-container">
+        <h2>Student Login</h2>
+        <form id="student-login-form">
+            <input type="text" id="student-email" placeholder="Email" required>
+            <input type="password" id="student-password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <!-- Sign Up Button (Linked to signup.html) -->
+        <a href="signup.html"><button class="signup-btn">Sign Up</button></a>
+    </div>
+</div>
+
+<script>
+    // Teacher Login Logic
+    document.getElementById("teacher-login-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get input values
+        const email = document.getElementById("teacher-username").value;
+        const password = document.getElementById("teacher-password").value;
+
+        fetch("http://localhost:4001/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem("token", data.accessToken);
+
+                    alert("Teacher login successful!");
+                    window.location.href = "../teacherDashboard/teacherDashboard.html";
+                } else {
+                    alert("Login failed: " + (data.message || "Invalid credentials"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+    });
+
+
+    // Student Login Logic
+    document.getElementById("student-login-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get input values
+        const email = document.getElementById("student-email").value;
+        const password = document.getElementById("student-password").value;
+
+        // Test credentials validation for student
+        fetch("http://localhost:4001/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log({data})
+                if (data.accessToken) {
+                    localStorage.setItem("token", data.accessToken);
+                    alert("Student login successful!");
+                    window.location.href = "../studentDashboard/student_dashboard1.html";
+                } else {
+                    alert("Login failed: " + (data.message || "Invalid credentials"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+    });
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
