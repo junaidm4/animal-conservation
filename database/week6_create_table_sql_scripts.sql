@@ -1,5 +1,5 @@
 -- SAME CODE
-INSERT INTO organisations
+INSERT INTO organisations GGGGGGGGG
 VALUES (1, 'Coventry' , 'School', '2010-03-06', 'Active', '2015-03-06');
 SELECT * FROM organisations;
 
