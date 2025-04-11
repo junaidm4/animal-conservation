@@ -1,4 +1,5 @@
--- WEEK 4
+-- WEEK 6
+-- SAME CODE
 CREATE TABLE organisations(
 	organisation_id INT AUTO_INCREMENT PRIMARY KEY, 
     organisation_name VARCHAR(50) NOT NULL, 
@@ -25,23 +26,6 @@ CREATE TABLE users(
 );
 SELECT * FROM users;
 
-CREATE TABLE tracking(
-	user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-	age	TINYINT UNSIGNED NOT NULL,
-	gender ENUM('Male', 'Female', 'Other')	NOT NULL,
-	country	VARCHAR(60) NOT NULL,
-	last_active	DATETIME NOT NULL,
-	user_activity TEXT NOT NULL,	
-	most_popular_service VARCHAR(50) NOT NULL,	
-	least_popular_service VARCHAR(50) NOT NULL,
-	feedback_score	SMALLINT NOT NULL,	
-	feedback_praise	TEXT NOT NULL,	
-	feedback_criticism	TEXT NOT NULL,	
-	CHECK (feedback_score > 0 AND feedback_score <=10),
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
-SELECT * FROM tracking;
-
 CREATE TABLE students (
 	user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     access_code MEDIUMINT NOT NULL UNIQUE, 
@@ -62,19 +46,6 @@ CREATE TABLE message (
     FOREIGN KEY(recipient_id) REFERENCES users(user_id)
 );
 SELECT * FROM message;
-
-CREATE TABLE digital_library (
-	digital_library_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
-	user_id BIGINT NOT NULL, 
-    organisation_id INT NOT NULL,
-    uploaded_date DATETIME NOT NULL, 
-    file_name VARCHAR(100) NOT NULL,
-    file_link TEXT NOT NULL,
-    file_info TEXT NOT NULL,
-    FOREIGN KEY(user_id) REFERENCES users(user_id),
-    FOREIGN KEY(organisation_id) REFERENCES organisations(organisation_id)
-);
-SELECT * FROM digital_library;
 
 CREATE TABLE classes (
 	class_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
@@ -116,4 +87,155 @@ CREATE TABLE users_class_schools (
 );
 SELECT * FROM users_class_schools;
 
+-- NEW CODE
+CREATE TABLE services(
+	service_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    service_name VARCHAR(30)
+);
+SELECT * FROM services;
+
+CREATE TABLE user_analytics(
+	user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	age	TINYINT UNSIGNED NOT NULL,
+	gender ENUM('Male', 'Female', 'Other')	NOT NULL,
+	country	VARCHAR(60) NOT NULL,
+	last_active	DATETIME NOT NULL,
+	most_popular_service BIGINT NOT NULL,	
+	least_popular_service BIGINT NOT NULL,
+	feedback_score	SMALLINT NOT NULL,	
+	feedback_praise	TEXT NOT NULL,	
+	feedback_criticism	TEXT NOT NULL,	
+	CHECK (feedback_score > 0 AND feedback_score <=10),
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(most_popular_service) REFERENCES services(service_id),
+    FOREIGN KEY(least_popular_service) REFERENCES services(service_id)
+    
+);
+SELECT * FROM user_analytics;
+
+CREATE TABLE digital_library (
+	digital_library_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
+	user_id BIGINT NOT NULL, 
+    organisation_id INT NOT NULL,
+    uploaded_date DATETIME NOT NULL, 
+    file_name VARCHAR(100) NOT NULL,
+    file_link TEXT NOT NULL,
+    file_info TEXT NOT NULL,
+    views BIGINT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(organisation_id) REFERENCES organisations(organisation_id)
+);
+SELECT * FROM digital_library;
+
+CREATE TABLE student_assessment_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Clicked', 'Started', 'Paused', 'Finished', 'Submitted') NOT NULL,
+    assignment_id BIGINT NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+	answers ENUM ('Correct', 'Incorrect', 'N/A') NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(assignment_id) REFERENCES assignment(assignment_id)
+);
+SELECT * FROM student_assessment_logs;
+
+CREATE TABLE user_accounts_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Login', 'Logout', 'Other') NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+	action_status ENUM ('Success', 'Failure') NOT NULL,
+	failure_reason ENUM ('Wrong password', 'Locked account', 'Wrong access code', 'Maintenance', 'N/A') NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+SELECT * FROM user_accounts_logs;
+
+CREATE TABLE user_activity_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Clicked', 'Started', 'Paused', 'Finished') NOT NULL,
+    service_id BIGINT NOT NULL, 
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(service_id) REFERENCES services(service_id)
+);
+SELECT * FROM user_activity_logs;
+
+CREATE TABLE customisation_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Customise', 'Remove') NOT NULL,
+	customise_which ENUM ('Profile Pic', 'Bio', 'Background image') NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+SELECT * FROM customisation_logs;
+
+CREATE TABLE teacher_assessment_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Create', 'Edit', 'Set', 'Remove') NOT NULL,
+	assignment_parts ENUM ('Assignment name', 'Asssignment details', 'Questions', 'Deadline') NOT NULL,
+    assignment_id BIGINT NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(assignment_id) REFERENCES assignment(assignment_id)
+);
+SELECT * FROM teacher_assessment_logs;
+
+CREATE TABLE teacher_feedback_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	teacher_id BIGINT NOT NULL,
+    student_id BIGINT NOT NULL,
+    assignment_id BIGINT NOT NULL,
+	action_type ENUM ('Add', 'Edit', 'Remove') NOT NULL,
+	results ENUM ('Grade', 'Feedback') NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+    FOREIGN KEY(teacher_id) REFERENCES users(user_id),
+    FOREIGN KEY(student_id) REFERENCES users(user_id),
+    FOREIGN KEY(assignment_id) REFERENCES assignment_students(assignment_id)
+);
+SELECT * FROM teacher_feedback_logs;
+
+CREATE TABLE user_digital_library_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Uploaded', 'Downloaded', 'Edited', 'Viewed', 'Removed') NOT NULL,
+    content_id BIGINT NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+	action_status ENUM ('Success', 'Failure') NOT NULL,
+	failure_reason ENUM ('Permission denied', 'N/A') NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+SELECT * FROM user_digital_library_logs;
+
+CREATE TABLE class_logs(
+	log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id BIGINT NOT NULL,
+	action_type ENUM ('Add', 'Edit', 'Remove') NOT NULL,
+	class_info ENUM ('Class schedule', 'Learning content') NOT NULL,
+    class_id BIGINT NOT NULL,
+	timestamp DATETIME NOT NULL, 
+	ip_address VARCHAR(60) NOT NULL,
+	device_info TEXT NOT NULL,
+	action_status ENUM ('Success', 'Failure') NOT NULL,
+	failure_reason ENUM ('Permission denied', 'N/A') NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(class_id) REFERENCES classes(class_id)
+);
+SELECT * FROM class_logs;
 
