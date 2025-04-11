@@ -5,3 +5,6 @@ https://livecoventryac-my.sharepoint.com/:w:/g/personal/fisherm12_uni_coventry_a
 
 link to resources such as product backlog, meeting logs etc:
 https://livecoventryac-my.sharepoint.com/:w:/g/personal/fisherm12_uni_coventry_ac_uk/EZEThSAsHJdFhBnUQubh854B0N-FewXcShLkCKYEQeVyHQ?e=J3GClL
+
+link to Padlet:
+https://padlet.com/miahd6/file-manager-ybcqwgtvu2q4vd22
